@@ -244,7 +244,7 @@ header {
 
 .doces-grid {
     display: grid;
-    grid-template-columns: repeat(4, 250px);
+    grid-template-columns: repeat(4, 1fr);
     gap: 30px;
     justify-content: center;
 }
@@ -263,17 +263,17 @@ header {
 }
 
 .doce-image {
-    height: 280px;
     width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    padding-top: 100%;
+    position: relative;
     overflow: hidden;
     background-color: #f8f8f8;
-    position: relative;
 }
 
 .doce-image img {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -281,7 +281,7 @@ header {
     transition: transform 0.3s ease;
 }
 
-.doce-image img:hover {
+.doce-card:hover .doce-image img {
     transform: scale(1.05);
 }
 
@@ -324,13 +324,18 @@ header {
 }
 
 .demo-foto {
-    aspect-ratio: 4 / 3;
+    position: relative;
+    width: 100%;
+    padding-top: 75%;
     border-radius: 15px;
     overflow: hidden;
     box-shadow: var(--shadow);
 }
 
 .foto-placeholder {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     background: #f8f8f8;
@@ -340,10 +345,12 @@ header {
     justify-content: center;
     transition: var(--transition);
     cursor: pointer;
-    position: relative;
 }
 
 .foto-placeholder img {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -357,6 +364,7 @@ header {
 .foto-placeholder span {
     font-size: 3rem;
     margin-bottom: 10px;
+    z-index: 1;
 }
 
 .foto-placeholder p {
@@ -370,6 +378,7 @@ header {
     border-radius: 20px;
     font-size: 0.85rem;
     font-weight: 500;
+    z-index: 2;
 }
 
 /* Festas Section */
@@ -432,12 +441,10 @@ header {
     margin-bottom: 20px;
 }
 
-/* Sobre Section */
+/* Sobre Section - COM BORDA ARREDONDADA */
 .sobre {
     padding: 80px 0;
-    background: rgba(255, 255, 255, 0.85);
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
+    background: rgba(255, 255, 255, 0.95);
 }
 
 .sobre .container {
@@ -448,7 +455,7 @@ header {
 
 .sobre-content {
     display: grid;
-    grid-template-columns: 1fr 1.2fr;
+    grid-template-columns: 1fr 1fr;
     gap: 50px;
     align-items: center;
 }
@@ -461,23 +468,28 @@ header {
 
 .sobre-image .image-placeholder {
     width: 100%;
-    max-width: 380px;
-    height: 450px;
-    background: #f8f8f8;
-    border-radius: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    box-shadow: var(--shadow);
+    max-width: 450px;
+    position: relative;
+    border-radius: 50%;
+    box-shadow: 0 0 0 8px var(--white), 0 0 0 10px var(--primary-color), var(--shadow);
     overflow: hidden;
 }
 
+.sobre-image .image-placeholder::before {
+    content: '';
+    display: block;
+    padding-top: 100%;
+}
+
 .sobre-image .image-placeholder img {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
     object-position: center center;
+    background: #fce4ec;
 }
 
 .sobre-text {
@@ -733,14 +745,14 @@ footer p {
 /* Large Desktop - 1400px+ */
 @media (max-width: 1400px) {
     .doces-grid {
-        grid-template-columns: repeat(3, 250px);
+        grid-template-columns: repeat(3, 1fr);
     }
 }
 
 /* Desktop - 1200px */
 @media (max-width: 1200px) {
     .doces-grid {
-        grid-template-columns: repeat(3, 220px);
+        grid-template-columns: repeat(3, 1fr);
         gap: 20px;
     }
 
@@ -771,12 +783,11 @@ footer p {
 
     .sobre-content {
         grid-template-columns: 1fr 1fr;
-        gap: 40px;
+        gap: 30px;
     }
 
     .sobre-image .image-placeholder {
-        max-width: 320px;
-        height: 380px;
+        max-width: 350px;
     }
 }
 
@@ -857,10 +868,6 @@ footer p {
         padding: 0 15px;
     }
 
-    .doce-image {
-        height: 180px;
-    }
-
     .doce-card h3 {
         font-size: 1.1rem;
         padding: 15px 15px 8px;
@@ -904,14 +911,19 @@ footer p {
         font-size: 0.9rem;
     }
 
+    /* Sobre - responsivo mobile */
     .sobre-content {
         grid-template-columns: 1fr;
         gap: 30px;
     }
 
+    .sobre-image {
+        order: -1;
+    }
+
     .sobre-image .image-placeholder {
-        max-width: 100%;
-        height: 350px;
+        max-width: 280px;
+        margin: 0 auto;
     }
 
     .sobre-text {
@@ -1009,12 +1021,8 @@ footer p {
         grid-template-columns: 1fr;
     }
 
-    .doce-image {
-        height: 200px;
-    }
-
     .sobre-image .image-placeholder {
-        height: 300px;
+        max-width: 220px;
     }
 
     .sobre-text h3 {
