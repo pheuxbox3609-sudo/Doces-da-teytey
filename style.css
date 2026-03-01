@@ -127,9 +127,8 @@ header {
 
 .nav-links {
     display: flex;
-    list-style: none 15px;
-    ;
-    gap:
+    list-style: none;
+    gap: 15px;
 }
 
 .nav-links a {
